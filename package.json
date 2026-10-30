@@ -1,0 +1,36 @@
+{
+  "name": "url-search-params-sanitizer",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/a-sitnikov/url-search-params-sanitizer#readme",
+  "bugs": {
+    "url": "https://github.com/a-sitnikov/url-search-params-sanitizer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-sitnikov/url-search-params-sanitizer.git"
+  },
+  "license": "MIT",
+  "author": "a.sitnikov@outlook.com",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}
