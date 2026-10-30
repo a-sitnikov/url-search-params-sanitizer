@@ -25,12 +25,15 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "vite build",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "typescript": "^7.0.2",
+    "@microsoft/api-extractor": "^7.60.0",
+    "typescript": "^6.0.3",
+    "unplugin-dts": "^1.1.2",
+    "vite": "8.3.5",
     "vitest": "^5.0.5"
   }
 }
