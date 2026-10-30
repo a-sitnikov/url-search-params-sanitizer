@@ -126,6 +126,7 @@ const rules = compileUrlSearchParamRules([
 `intParam` accepts an integer written as 1–15 digits. The default range is `0` through `Number.MAX_SAFE_INTEGER`. A value outside `min` or `max` is dropped. The parsed value is a `number`.
 
 ```ts
+intParam()("15"); // 15
 intParam({ min: 1, max: 10 })("01"); // 1
 intParam({ min: 1, max: 10 })("11"); // undefined
 intParam({ min: 1, max: 10 })("-1"); // undefined

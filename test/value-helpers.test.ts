@@ -1,6 +1,14 @@
 import { expect, it } from "vitest";
 
-import { stringParam } from "../src/value-helpers.js";
+import { intParam, stringParam } from "../src/value-helpers.js";
+
+it("uses the default integer range when called with no options", () => {
+  const parse = intParam();
+
+  expect(parse("0")).toBe(0);
+  expect(parse("15")).toBe(15);
+  expect(parse("-1")).toBeUndefined();
+});
 
 it("keeps a string within max and drops a longer one", () => {
   const parse = stringParam({ max: 3 });

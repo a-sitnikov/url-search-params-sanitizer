@@ -7,7 +7,7 @@ export const intParam =
   }: {
     min?: number;
     max?: number;
-  }): UrlSearchParamValueFn<number> =>
+  } = {}): UrlSearchParamValueFn<number> =>
     (value) => {
       if (!/^\d{1,15}$/.test(value)) return undefined;
 
