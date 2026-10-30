@@ -1,0 +1,1 @@
+# url-search-params-sanitizer
