@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 
 import {
+  boolParam,
   compileUrlSearchParamRules,
   intParam,
   parseSearchParams,
@@ -46,6 +47,22 @@ it("uses the first matching rule", () => {
   expect(parseSearchParams(new URLSearchParams("page=2"), compiled)).toEqual({
     page: 2,
   });
+});
+
+it("parses boolean tokens as booleans", () => {
+  const compiled = compileUrlSearchParamRules([
+    { key: "flag", value: boolParam({ true: "1", false: "0" }) },
+  ]);
+
+  expect(parseSearchParams(new URLSearchParams("flag=0"), compiled)).toEqual({
+    flag: false,
+  });
+  expect(parseSearchParams(new URLSearchParams("flag=1"), compiled)).toEqual({
+    flag: true,
+  });
+  expect(parseSearchParams(new URLSearchParams("flag=true"), compiled)).toEqual(
+    {},
+  );
 });
 
 it("drops a number outside the allowed range", () => {

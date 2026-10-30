@@ -139,6 +139,16 @@ stringParam({ max: 3 })("abcd"); // undefined
 stringParam({ max: 3, cut: true })("abcd"); // "abc"
 ```
 
+`boolParam` maps two exact strings to `true` and `false`. Any other text is dropped. The query string keeps the token you declared, so `"1"` stays `"1"`.
+
+```ts
+const parse = boolParam({ true: "1", false: "0" });
+
+parse("1"); // true
+parse("0"); // false
+parse("true"); // undefined
+```
+
 ## License
 
 MIT

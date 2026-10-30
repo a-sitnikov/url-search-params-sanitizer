@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 
-import { intParam, stringParam } from "../src/value-helpers.js";
+import { boolParam, intParam, stringParam } from "../src/value-helpers.js";
 
 it("uses the default integer range when called with no options", () => {
   const parse = intParam();
@@ -15,6 +15,15 @@ it("keeps a string within max and drops a longer one", () => {
 
   expect(parse("ab")).toBe("ab");
   expect(parse("abcd")).toBeUndefined();
+});
+
+it("maps the true and false tokens to booleans", () => {
+  const parse = boolParam({ true: "1", false: "0" });
+
+  expect(parse("1")).toBe(true);
+  expect(parse("0")).toBe(false);
+  expect(parse("true")).toBeUndefined();
+  expect(parse("")).toBeUndefined();
 });
 
 it("cuts a longer string to max when cut is enabled", () => {

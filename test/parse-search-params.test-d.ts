@@ -1,6 +1,7 @@
 import { expectTypeOf, it } from "vitest";
 
 import {
+  boolParam,
   compileUrlSearchParamRules,
   intParam,
   parseSearchParams,
@@ -39,6 +40,17 @@ it("infers an enum rule as its members", () => {
 
   expectTypeOf(parsed).toEqualTypeOf<{
     status?: Status;
+  }>();
+});
+
+it("infers a boolean param as boolean", () => {
+  const compiled = compileUrlSearchParamRules([
+    { key: "flag", value: boolParam({ true: "1", false: "0" }) },
+  ]);
+  const parsed = parseSearchParams(new URLSearchParams("flag=1"), compiled);
+
+  expectTypeOf(parsed).toEqualTypeOf<{
+    flag?: boolean;
   }>();
 });
 

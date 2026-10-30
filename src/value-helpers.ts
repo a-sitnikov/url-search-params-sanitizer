@@ -1,5 +1,19 @@
 import type { UrlSearchParamValueFn } from "./types.js";
 
+export const boolParam =
+  ({
+    true: whenTrue,
+    false: whenFalse,
+  }: {
+    true: string;
+    false: string;
+  }): UrlSearchParamValueFn<boolean> =>
+  (value) => {
+    if (value === whenTrue) return true;
+    if (value === whenFalse) return false;
+    return undefined;
+  };
+
 export const intParam =
   ({
     min = 0,

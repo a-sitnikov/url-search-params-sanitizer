@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 
 import {
+  boolParam,
   compileUrlSearchParamRules,
   intParam,
   sanitizeSearchParams,
@@ -30,6 +31,15 @@ it("drops unknown keys, rejected values, and repeats that are not multiple", () 
   expect(sanitizeSearchParams(input, rules).toString()).toBe(
     "page=2&q=hell&status=live&sort=name&utm_source=email&tag=red&tag=blue",
   );
+});
+
+it("keeps boolean tokens and drops any other text", () => {
+  const compiled = compileUrlSearchParamRules([
+    { key: "flag", value: boolParam({ true: "1", false: "0" }) },
+  ]);
+  const params = new URLSearchParams("flag=1&flag=true&flag=0");
+
+  expect(sanitizeSearchParams(params, compiled).toString()).toBe("flag=1");
 });
 
 it("rewrites a value when the parser changes its text", () => {

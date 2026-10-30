@@ -16,7 +16,7 @@ import type {
   UrlSearchParamValueFn,
 } from "./types.js";
 
-export { intParam, stringParam } from "./value-helpers.js";
+export { boolParam, intParam, stringParam } from "./value-helpers.js";
 
 export type {
   ICompiledUrlSearchParamRule,
@@ -73,7 +73,8 @@ const ruleValue = (
   };
 };
 
-const searchParamText = (value: UrlSearchParamScalar) => {
+const searchParamText = (value: UrlSearchParamScalar, raw: string) => {
+  if (typeof value === "boolean") return raw;
   if (isString(value)) return value;
   return String(value);
 };
@@ -119,7 +120,7 @@ export const sanitizeSearchParams = (
       continue;
     }
 
-    const text = searchParamText(value);
+    const text = searchParamText(value, raw);
     if (text !== raw) changed = true;
     seen.add(key);
     accepted.append(key, text);
